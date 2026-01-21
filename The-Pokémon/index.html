@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>PokéDoc</title>
+  </head>
+  <body class="font-mono">
+    <section class="flex items-center p-4 pt-8 flex-col gap-8">
+      <h1 class="text-5xl font-semibold">PokéDoc</h1>
+      <div class="flex flex-col md:flex-row gap-4 w-full md:w-4/5 lg:w-3/5">
+        <input
+          type="number"
+          placeholder="Enter number of pokemon cards"
+          class="w-full border border-gray-500 rounded-md px-4 py-2"
+          id="pokemon-number"
+        />
+        <button
+          class="bg-blue-400 px-4 py-2 rounded-md shadow-md hover:bg-blue-600"
+          id="fetch-button"
+        >
+          Fetch Pokémons
+        </button>
+      </div>
+      <div
+        class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-8 gap-4"
+        id="display-screen"
+      ></div>
+      <div id="footer" class="flex gap-4"></div>
+    </section>
+  </body>
+
+  <script>
+    const input = document.getElementById("pokemon-number");
+    const renderButton = document.getElementById("fetch-button");
+    renderButton.addEventListener("click", async function () {
+      const value = input.value;
+      if (value == isNaN || value <= 0) {
+        alert("Please eneter a number grater than 0");
+        return;
+      }
+      const data = await fetchPokemons(value, 0);
+      await displayCard(data);
+    });
+
+    async function fetchPokemons(limit, offset) {
+      const pokemons = await fetch(
+        `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`,
+      );
+      const data = await pokemons.json();
+      return data;
+    }
+
+    async function displayCard(data) {
+      const screen = document.getElementById("display-screen");
+      screen.innerHTML = "";
+      for (const pokemon of data.results) {
+        const response = await fetch(pokemon.url);
+        const details = await response.json();
+        const card = document.createElement("div");
+        card.className =
+          "bg-gradient-to-br from-blue-400 to-purple-500 rounded-lg p-4 shadow-md text-center  text-white";
+        card.innerHTML = `
+            <img src="${details.sprites.front_default}" alt="${pokemon.name}" class="w-24 h-24 mx-auto">
+            <h3 class="text-lg font-bold capitalize">${pokemon.name}</h3>
+            <p class="text-sm text-gray-600">ID: ${details.id}</p>
+        `;
+        screen.appendChild(card);
+      }
+      displayFooter(data);
+    }
+
+    async function displayFooter(data) {
+      const footer = document.getElementById("footer");
+      footer.innerHTML = "";
+      if (data.previous != null) {
+        const prevButton = document.createElement("button");
+        prevButton.className =
+          "bg-blue-400 px-4 py-2 rounded-md shadow-md hover:bg-blue-600";
+        prevButton.innerHTML = `Fetch prev ${data.results.length}`;
+        footer.appendChild(prevButton);
+        prevButton.addEventListener("click", async function () {
+          const pokemon = await fetch(data.previous);
+          const apiData = await pokemon.json();
+          await displayCard(apiData);
+        });
+      }
+      if (data.next != null) {
+        const nextButton = document.createElement("button");
+        nextButton.className =
+          "bg-blue-400 px-4 py-2 rounded-md shadow-md hover:bg-blue-600";
+        nextButton.innerHTML = `Fetch next ${data.results.length}`;
+        footer.appendChild(nextButton);
+        nextButton.addEventListener("click", async function () {
+          const pokemon = await fetch(data.next);
+          const apiData = await pokemon.json();
+          await displayCard(apiData);
+        });
+      }
+    }
+  </script>
+
+</html>
