@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Background Changer</title>
+  </head>
+  <body class="font-mono">
+    <section class="min-h-screen flex flex-col justify-end items-center gap-10 p-4" id="screen">
+        <div class="grid grid-cols-3 md:grid-cols-6 xl:w-4/5 gap-4 w-full">
+            <button class="px-4 py-2 rounded shadow-md border bg-green-400" onclick="changeColor('green')">Green</button>
+            <button class="px-4 py-2 rounded shadow-md border bg-yellow-400" onclick="changeColor('yellow')">Yellow</button>
+            <button class="px-4 py-2 rounded shadow-md border bg-blue-400" onclick="changeColor('blue')">Blue</button>
+            <button class="px-4 py-2 rounded shadow-md border bg-red-400" onclick="changeColor('red')">Red</button>
+            <button class="px-2 sm:px-4 py-2 rounded shadow-md border bg-black text-white" onclick="changeColor('white')">Default</button>
+            <input type="color" placeholder="Pick color " class="rounded border border-2 border-gray-200 px-4 py-2 h-10 w-full" id="color-input">
+        </div>
+        <div class="grid grid-cols-3 md:grid-cols-6 xl:w-4/5 mb-4 gap-4 items-center w-full">
+            <p class="font-semibold text-center">Gradient Bg: </p>
+            <input type="color" placeholder="Pick color " class="rounded border border-2 border-gray-200 px-4 py-2  w-full h-10" id="first-color-gradient">
+            <input type="color" placeholder="Pick color " class="rounded border border-2 border-gray-200 px-4 py-2  w-full h-10" id="second-color-gradient">
+            <input type="number" name="degree" id="degree" placeholder="Enter degree" value="0" min="0" max="360" class="rounded border border-2 border-gray-200 px-4 py-2 h-10">
+            <button id="add-gradient" class="px-4 py-2 rounded shadow-md bg-blue-400 text-white border">Add </button>
+            <button id="remove-gradient" class="px-4 py-2 rounded shadow-md bg-red-400 text-white border">Remove</button>
+        </div>
+    </section>
+  </body>
+  <script>
+    const screen = document.getElementById("screen")
+    const colorInput = document.getElementById("color-input")
+    const firstcolor = document.getElementById("first-color-gradient")
+    const secondcolor = document.getElementById("second-color-gradient")
+    const direction = document.getElementById("degree")
+    const addGradient = document.getElementById("add-gradient")
+    const removeGradient = document.getElementById("remove-gradient")
+
+    addGradient.addEventListener("click", function() {
+        screen.style.backgroundImage = `linear-gradient(${direction.value}deg, ${firstcolor.value}, ${secondcolor.value})`
+    })
+
+    removeGradient.addEventListener("click", function() {
+        screen.style.backgroundImage = "none"
+    })
+
+    colorInput.addEventListener("change", function () {
+        changeColor(colorInput.value)
+    })
+
+    function changeColor(color) {
+        screen.style.backgroundColor = `${color}`
+    }
+
+  </script>
+</html>
