@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>ChronoTask</title>
+  </head>
+  <body>
+    <main class="flex flex-col p-2 pt-0 h-screen w-screen">
+      <nav class="flex justify-between px-8 py-2">
+        <div class="flex gap-2 items-center">
+          <img src="./assets/logo.png" alt="Logo" class="h-10 w-10" />
+          <h3 class="cursor-pointer">ChronoTask</h3>
+        </div>
+        <div class="flex items-center gap-8">
+          <span class="cursor-pointer">Features</span>
+          <span class="cursor-pointer">Solutions</span>
+          <span class="cursor-pointer">Resources</span>
+          <span class="cursor-pointer">Pricing</span>
+        </div>
+        <div class="flex gap-8 items-center">
+          <div class="cursor-pointer">Signin</div>
+          <div class="border border-1 border-gray-400 rounded-xl px-4 py-1 cursor-pointer">
+            Get Demo
+          </div>
+        </div>
+      </nav>
+      <section
+        class="flex-1 rounded-3xl border border-2 border-gray-100 relative overflow-hidden flex flex-col justify-center items-center"
+        style="
+          background-color: white;
+          background-image:
+            radial-gradient(circle, #bbb 8%, transparent 10%),
+            radial-gradient(circle, #bbb 8%, transparent 10%);
+          background-repeat: repeat;
+          background-size: 12px 12px;
+          background-position:
+            0 0,
+            6px 6px;
+        "
+      >
+        <img
+          src="./assets/tl.png"
+          alt="notes image"
+          class="absolute w-64 aspect-ration top-7 left-0 hidden lg:block"
+        />
+        <img
+          src="./assets/bl.png"
+          alt="task image"
+          class="absolute w-72 aspect-ration bottom-0 left-8 hidden lg:block"
+        />
+        <img
+          src="./assets/tr.png"
+          alt="reminder image"
+          class="absolute h-96 aspect-ration right-0 top-6 hidden lg:block"
+        />
+        <img
+          src="./assets/br.png"
+          alt="integration image"
+          class="absolute w-84 aspect-ration bottom-0 right-10 hidden lg:block"
+        />
+        <img src="./assets/logo.png" alt="Logo" class="bg-transparent h-24" />
+        <h1 class="lg:text-7xl  text-center mb-6">
+          Think, plan, and track <br><span class="text-gray-300">all in one place</span>
+        </h1>
+        <p class="mb-6 text-xl">Efficiently manage your task and boost productivity</p>
+        <div class="px-4 py-2 rounded-xl bg-blue-500 text-white">Get free demo</div>
+      </section>
+    </main>
+  </body>
+</html>
