@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Form Builder</title>
+</head>
+<body class="h-screen w-screen max-w-7xl mx-auto bg-gray-200 pt-4 font-mono">
+    <h1 class="text-center text-5xl font-bold mb-8">Form Builder</h1>
+    <div class="flex flex-col lg:flex-row gap-4 p-4">
+ <div class="shadow-md w-full rounded-xl lg:h-96 bg-white flex flex-col  justify-between gap-4 px-4 py-2" >
+        <div id="input-option" class="flex flex-col gap-4">
+            <div class="flex-col flex">
+                <span class="font-bold">Select Input type:</span>
+                <select name="input-type" id="input-type" class="border border-2 border-gray-200 rounded-xl px-4 py-2">
+                    <option value="">Select One …</option>
+                    <option value="text-input">Text Input</option>
+                    <option value="number-input">Number Input</option>
+                    <option value="email-input">Email Input</option>
+                    <option value="password-input">Password Input</option>
+                    <option value="select">Select</option>
+                    <option value="radio">Radio Button</option>
+                </select>
+            </div>
+            <div id="input-question" class="flex flex-col"></div>
+        </div>
+        <button id="add-field" class="bg-blue-400 px-4 py-2 rounded-xl w-full ">Add Field</button>
+    </div>
+    <div class="shadow-md bg-white w-full rounded-xl h-fit min-h-96" id="form-preview">
+        <h1 class="font-bold text-xl bg-white rounded-xl px-4 py-2">Form preview</h1>
+    </div>
+    </div>
+</body>
+<script type="module" src="index.js"></script>
+</html>
