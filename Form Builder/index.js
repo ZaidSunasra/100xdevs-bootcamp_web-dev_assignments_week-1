@@ -53,7 +53,7 @@ const fieldComponents = {
             <input type="text" placeholder="option1,option2,option3" class="px-4 py-2 border border-2 border-gray-200 rounded-xl options-input"/>
         `,
         renderField: (label, options) => {
-            const optionsHTML = options.split(",").map(opt => `<option value="${opt.trim()}">${opt.trim()}</option>`).join("");
+            const optionsHTML = options.split(",").map(opt => `<option value="${opt.trim()}" class="capitalize">${opt.trim()}</option>`).join("");
             return `
                 <label class="font-bold capitalize">${label}</label>
                 <select class="px-4 py-2 border border-2 border-gray-200 rounded-xl">
